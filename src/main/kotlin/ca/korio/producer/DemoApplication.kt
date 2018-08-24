@@ -1,11 +1,37 @@
 package ca.korio.producer
 
+import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import org.springframework.cloud.stream.annotation.EnableBinding
+import org.springframework.cloud.stream.annotation.StreamListener
+import org.springframework.cloud.stream.messaging.Sink
+
 
 @SpringBootApplication
-class DemoApplication
+@EnableBinding(Sink::class)
+class LoggingConsumerApplication {
 
-fun main(args: Array<String>) {
-    runApplication<DemoApplication>(*args)
+    @StreamListener(Sink.INPUT)
+    fun handle(person: Person) {
+        println("Received: $person")
+    }
+
+/*    class Person {
+        var name: String? = null
+        override fun toString(): String? {
+            return this.name
+        }
+    }*/
+
+    data class Person(
+            var name: String? = null
+    )
+
+    companion object {
+
+        @JvmStatic
+        fun main(args: Array<String>) {
+            SpringApplication.run(LoggingConsumerApplication::class.java, *args)
+        }
+    }
 }
