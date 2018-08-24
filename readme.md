@@ -45,3 +45,12 @@ spec:
     app: kafka-manager
 ```
 - next, create a cluster in the manager. It needs a zookeeper host.  Use "zookeeper".
+- create "outside" connections per the Yolean instructions, with the following application.properties (sub in the proper URL and port):
+```yaml
+spring.cloud.stream.bindings.input.binder=kafka
+spring.cloud.stream.bindings.output.binder=kafka
+spring.cloud.stream.kafka.binder.auto-create-topics=true
+#spring.cloud.stream.kafka.binder.brokers=broker.kafka:9092 #use in k8s cluster
+spring.cloud.stream.kafka.binder.brokers=http://192.168.39.59:32401
+spring.cloud.stream.kafka.binder.defaultBrokerPort=32401
+```
