@@ -9,7 +9,7 @@ However... I did have the problem listed here which was resolved by installing t
 in this post: https://github.com/jenkins-x/jx/issues/1271#issuecomment-405623127
 
 ### Next steps
-Admin pwd: grinpaint
+Admin pwd: swoopblack
 uid: admin
 
 Use monocular to deploy?? Find its url (and all URLs) with: `kubectl get ingress
